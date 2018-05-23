@@ -12,32 +12,37 @@ namespace TicTacToe.UnitTests
     public class GameWinnerServiceTests
     {
         IGameWinnerService _gameWinnerService;
+        private char[,] _gameBoard;
 
         [SetUp]
         public void SetupUnitTest()
         {
             _gameWinnerService = new GameWinnerService();
+            _gameBoard = new char[3, 3]
+                  {
+                      {' ', ' ', ' '},
+                      {' ', ' ', ' '},
+                      {' ', ' ', ' '}
+                  };
         }
 
         [Test]
         public void NeitherPlayerHasThreeInARow()
         {
-           const char expected = ' ';
-            var gameBoard = new char[3, 3] { { ' ', ' ', ' '},
-                                             { ' ', ' ', ' '},
-                                             { ' ', ' ', ' '} };
-            var actual = _gameWinnerService.Validate(gameBoard);
+            const char expected = ' ';            
+            var actual = _gameWinnerService.Validate(_gameBoard);
             Assert.AreEqual(expected, actual);
         }
 
         [Test]
         public void PlayerWithAllSpacesInTopRowIsWinner()
         {
-           const char expected = 'X';
-            var gameBoard = new char[3, 3] { { expected, expected, expected},
-                                             { ' ', ' ', ' '},
-                                             { ' ', ' ', ' '} };
-            var actual = _gameWinnerService.Validate(gameBoard);
+            const char expected = 'X';
+            for (var rowIndex = 0; rowIndex < 3; rowIndex++)
+            {
+                _gameBoard[0, rowIndex] = expected;
+            }
+            var actual = _gameWinnerService.Validate(_gameBoard);
             Assert.AreEqual(expected.ToString(), actual.ToString());
         }
     }
