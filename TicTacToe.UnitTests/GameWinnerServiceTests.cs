@@ -45,5 +45,17 @@ namespace TicTacToe.UnitTests
             var actual = _gameWinnerService.Validate(_gameBoard);
             Assert.AreEqual(expected.ToString(), actual.ToString());
         }
+
+        [Test]
+        public void PlayerWithAllSpacesInColumnIsWinner()
+        {
+            const char expected = 'X';
+            for (var columnIndex = 0; columnIndex < 3; columnIndex++)
+            {
+                _gameBoard[columnIndex, 0] = expected;
+            }
+            var actual = _gameWinnerService.Validate(_gameBoard);
+            Assert.AreEqual(expected.ToString(), actual.ToString());
+        }
     }
 }
