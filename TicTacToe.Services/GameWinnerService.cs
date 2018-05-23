@@ -22,7 +22,23 @@ namespace TicTacToe.Services
             if (currentWinningSymbol != SymbolForNoWinner)
                 return currentWinningSymbol;
             currentWinningSymbol = CheckForThreeInARowInVerticalColumn(gameBoard);
+            if (currentWinningSymbol != SymbolForNoWinner)
+                return currentWinningSymbol;
+            currentWinningSymbol = CheckForThreeInARowDiagonally(gameBoard);
             return currentWinningSymbol;
+        }
+
+        private static char CheckForThreeInARowDiagonally(char[,] gameBoard)
+        {
+            var cellOneChar = gameBoard[0, 0];
+            var cellTwoChar = gameBoard[1, 1];
+            var cellThreeChar = gameBoard[2, 2];
+            if (cellOneChar == cellTwoChar &&
+                cellTwoChar == cellThreeChar)
+            {
+                return cellOneChar;
+            }
+            return SymbolForNoWinner;
         }
 
         private static char CheckForThreeInARowInVerticalColumn(char[,] gameBoard)
