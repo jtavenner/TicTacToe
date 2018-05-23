@@ -23,5 +23,18 @@ namespace TicTacToe.UnitTests
             var actual = gameWinnerService.Validate(gameBoard);
             Assert.AreEqual(expected, actual);
         }
+
+        [Test]
+        public void PlayerWithAllSpacesInTopRowIsWinner()
+        {
+            IGameWinnerService gameWinnerService;
+            gameWinnerService = new GameWinnerService();
+            const char expected = 'X';
+            var gameBoard = new char[3, 3] { { expected, expected, expected},
+                                             { ' ', ' ', ' '},
+                                             { ' ', ' ', ' '} };
+            var actual = gameWinnerService.Validate(gameBoard);
+            Assert.AreEqual(expected.ToString(), actual.ToString());
+        }
     }
 }
