@@ -17,15 +17,23 @@ namespace TicTacToe.Services
         {
             var currentWinningSymbol = ' ';
             currentWinningSymbol = CheckForThreeInARowInHorizontalRow(gameBoard);
+            if (currentWinningSymbol != ' ')
+                return currentWinningSymbol;
+            currentWinningSymbol = CheckForThreeInARowInVerticalColumn(gameBoard);
+            return currentWinningSymbol;
+        }
+
+        private static char CheckForThreeInARowInVerticalColumn(char[,] gameBoard)
+        {
             var rowOneChar = gameBoard[0, 0];
             var rowTwoChar = gameBoard[1, 0];
             var rowThreeChar = gameBoard[2, 0];
             if (rowOneChar == rowTwoChar &&
                 rowTwoChar == rowThreeChar)
             {
-                return currentWinningSymbol = rowOneChar;
+                return rowOneChar;
             }
-            return currentWinningSymbol;
+            return ' ';
         }
 
         private static char CheckForThreeInARowInHorizontalRow(char[,] gameBoard)
