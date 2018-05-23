@@ -13,11 +13,13 @@ namespace TicTacToe.Services
 
     public class GameWinnerService : IGameWinnerService
     {
+        private const char SymbolForNoWinner = ' ';
+
         public char Validate(char[,] gameBoard)
         {
-            var currentWinningSymbol = ' ';
+            var currentWinningSymbol = SymbolForNoWinner;
             currentWinningSymbol = CheckForThreeInARowInHorizontalRow(gameBoard);
-            if (currentWinningSymbol != ' ')
+            if (currentWinningSymbol != SymbolForNoWinner)
                 return currentWinningSymbol;
             currentWinningSymbol = CheckForThreeInARowInVerticalColumn(gameBoard);
             return currentWinningSymbol;
@@ -33,7 +35,7 @@ namespace TicTacToe.Services
             {
                 return rowOneChar;
             }
-            return ' ';
+            return SymbolForNoWinner;
         }
 
         private static char CheckForThreeInARowInHorizontalRow(char[,] gameBoard)
@@ -46,7 +48,7 @@ namespace TicTacToe.Services
             {
                 return columnOneChar;
             }           
-            return ' ';
+            return SymbolForNoWinner;
         }
     }
 }
